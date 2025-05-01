@@ -7,4 +7,6 @@ import com.eazybytes.eazyschool.model.Roles;
 @Repository
 public interface RolesRepository extends JpaRepository<Roles,Integer>{
 
+	Roles getByRoleName(String roleName);
+	
 }

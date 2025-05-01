@@ -11,6 +11,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import com.eazybytes.eazyschool.model.Person;
@@ -22,6 +23,9 @@ public class EazySchoolUsernamePwdAuthenticationProvider implements Authenticati
 
 	@Autowired
 	private PersonRepository personRepository;
+	
+	@Autowired
+	PasswordEncoder passwordEncdoer;
 
 	@Override
 	public Authentication authenticate(Authentication authentication) throws AuthenticationException {
@@ -30,8 +34,11 @@ public class EazySchoolUsernamePwdAuthenticationProvider implements Authenticati
 		String pwd = authentication.getCredentials().toString();
 		Person person = personRepository.readByEmail(email);
 
-		if (person != null && person.getPersonId() > 0 && pwd.equals(person.getPwd())) {
-			return new UsernamePasswordAuthenticationToken(person.getName(), pwd,
+		if (person != null && person.getPersonId() > 0 &&
+				passwordEncdoer.matches(pwd,person.getPwd())) 
+		
+		{
+			return new UsernamePasswordAuthenticationToken(person.getName(),null,
 					getGrantedAuthorities(person.getRoles()));
 
 		} else
