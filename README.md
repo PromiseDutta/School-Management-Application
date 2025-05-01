@@ -74,6 +74,6 @@ The `School Management Apllication` project is an  School Web Application built 
 - **DevTools**: Spring Boot DevTools for enhanced development experience with automatic restarts and live reload.
 
 ### Conclusion
-The `example_52` project is a comprehensive web application that provides essential functionalities for managing school operations, catering to both students and administrators. It emphasizes security, user experience, and maintainability, making it a robust solution for educational institutions. 
+The `School Management Apllication` project is a comprehensive web application that provides essential functionalities for managing school operations, catering to both students and administrators. It emphasizes security, user experience, and maintainability, making it a robust solution for educational institutions. 
 
 If you need more specific details about any particular feature or functionality, feel free to ask!
