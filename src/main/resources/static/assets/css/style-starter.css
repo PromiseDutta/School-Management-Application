@@ -21306,5 +21306,8 @@ h4.inner-text-title {
     line-height: 25px;
   }
 }
-
+.control-label:after {
+   content:"*";
+   color:red;
+}
 /* //team block */

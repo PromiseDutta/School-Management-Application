@@ -28,22 +28,19 @@ public class EazySchoolUsernamePwdAuthenticationProvider implements Authenticati
 	PasswordEncoder passwordEncdoer;
 
 	@Override
-	public Authentication authenticate(Authentication authentication) throws AuthenticationException {
-		// TODO Auto-generated method stub
-		String email = authentication.getName();
-		String pwd = authentication.getCredentials().toString();
-		Person person = personRepository.readByEmail(email);
-
-		if (person != null && person.getPersonId() > 0 &&
-				passwordEncdoer.matches(pwd,person.getPwd())) 
-		
-		{
-			return new UsernamePasswordAuthenticationToken(person.getName(),null,
-					getGrantedAuthorities(person.getRoles()));
-
-		} else
-			throw new BadCredentialsException("Invalid Credentials");
-	}
+	 public Authentication authenticate(Authentication authentication)
+	            throws AuthenticationException {
+	        String email = authentication.getName();
+	        String pwd = authentication.getCredentials().toString();
+	        Person person = personRepository.readByEmail(email);
+	        if(null != person && person.getPersonId()>0 &&
+	        		passwordEncdoer.matches(pwd,person.getPwd())){
+	            return new UsernamePasswordAuthenticationToken(
+	            		email, null, getGrantedAuthorities(person.getRoles()));
+	        }else{
+	            throw new BadCredentialsException("Invalid credentials!");
+	        }
+	    }
 
 	private List<GrantedAuthority> getGrantedAuthorities(Roles roles) {
 		List<GrantedAuthority> grantedauthorities = new ArrayList<>();
