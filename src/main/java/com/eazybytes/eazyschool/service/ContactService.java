@@ -15,6 +15,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.eazybytes.eazyschool.EazyschoolApplication;
+import com.eazybytes.eazyschool.config.EazySchoolProps;
 import com.eazybytes.eazyschool.constants.EazySchoolConstants;
 import com.eazybytes.eazyschool.model.Contact;
 import com.eazybytes.eazyschool.repository.ContactRepository;
@@ -29,6 +30,10 @@ public class ContactService {
 
 	@Autowired
 	private ContactRepository contactRepository;
+	
+	
+	@Autowired
+	EazySchoolProps eazySchoolProps;
 
 	public boolean saveMessageDetails(Contact contact) {
 		boolean isSaved = false;
@@ -52,10 +57,15 @@ public class ContactService {
 	}
 
 	public Page<Contact> findMsgsWithOpenStatus(int pageNum, String sortField, String sortDir) {
-		int pageSize = 5;
+		//int pageSize = 5;
+		int pageSize=eazySchoolProps.getPageSize();
+		if(eazySchoolProps.getContact()!=null && eazySchoolProps.getContact().get("pageSize") != null) {
+			pageSize=Integer.parseInt(eazySchoolProps.getContact().get("pageSize").trim());
+		}
+		
 		Pageable pageable = PageRequest.of(pageNum - 1, pageSize,
 				sortDir.equals("asc") ? Sort.by(sortField).ascending() : Sort.by(sortField).descending());
-		Page<Contact> msgPage = contactRepository.findByStatus(EazySchoolConstants.OPEN, pageable);
+		Page<Contact> msgPage = contactRepository.findByStatuswithQuery(EazySchoolConstants.OPEN, pageable);
 		return msgPage;
 	}
 }

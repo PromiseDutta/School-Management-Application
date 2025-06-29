@@ -7,7 +7,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 import java.util.Arrays;
 
-@Component
+//@Component
 public class BeanLister implements CommandLineRunner {
 
     private final ApplicationContext applicationContext;
