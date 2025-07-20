@@ -96,13 +96,14 @@ public class ContactRestController {
 	            response.setStatusMsg("Invalid Contact ID received");
 	            return ResponseEntity
 	                    .status(HttpStatus.BAD_REQUEST)
-	                    .body(response);
+	                    .body(response);	            
 	        }
 	        response.setStatusCode("200");
 	        response.setStatusMsg("Message successfully closed");
 	        return ResponseEntity
 	                .status(HttpStatus.OK)
 	                .body(response);
+	        
 	    }
 
 }

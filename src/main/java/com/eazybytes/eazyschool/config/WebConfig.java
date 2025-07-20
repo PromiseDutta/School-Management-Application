@@ -11,6 +11,7 @@ public class WebConfig implements WebMvcConfigurer {
     public void addViewControllers(ViewControllerRegistry registry) {
         registry.addViewController("/courses").setViewName("courses");
         registry.addViewController("/about").setViewName("about");
+        
        // registry.addViewController("/","/home","").setViewName("home");// You need to call addViewController() separately for each URL you want to map to the same view.
     }
 
